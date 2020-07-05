@@ -1,21 +1,25 @@
 clear
-IMG=imread("D:\SID\ANTI-FUN!!\SIES\TE 19-20\Sem 6\IPMV\Mini Project\GroupPhoto.jpg");
-IMG_SIZE=size(IMG);
-IMG_GS=rgb2gray(IMG);
-IMG_GS2=double(IMG_GS);
-[counts,bins]=imhist(IMG_GS);
+IMG=imread("bright.jpg"); 
+IMG_SIZE=size(IMG); 
+IMG_GS=rgb2gray(IMG); 
+IMG_GS2=double(IMG_GS); 
+
+[counts,bins]=imhist(IMG_GS); 
 counts=counts/sum(counts);
-CDF1=cumsum(counts);
+CDF1=cumsum(counts); 
+
 x=[0:1:255]
 CDF2=[0:1:255]
-CDF2=CDF2./max(CDF2)
-Tr=CDF1(IMG_GS2 + 1);
-z=interp1(CDF2,x,Tr,'spline');
+CDF2=CDF2./max(CDF2) 
+
+Tr=CDF1(IMG_GS2 + 1); 
+z=interp1(CDF2,x,Tr,'spline'); 
 z=matrix(z,IMG_SIZE(1),IMG_SIZE(2));
 Z=round(z);
-Z=uint8(Z);
+Z=uint8(Z); 
 hst1=imhist(IMG_GS);
 hst2=imhist(Z);
+
 figure(1)
 subplot(3,1,1)
 title('Original Image')
@@ -40,3 +44,4 @@ plot2d(CDF1)
 subplot(1,2,2)
 title('CDF of Enhanced Image')
 plot2d(CDF2)
+
